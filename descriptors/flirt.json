@@ -449,7 +449,7 @@
         },
  	{
 	    "id": "out_filename",
-	    "name": "out file",
+	    "name": "out file name",
 	    "type": "String",
 	    "value-key": "[OUT_FILENAME]",
 	    "command-line-flag": "-out",
@@ -458,7 +458,7 @@
 	},
 	{
 	    "id": "out_mat_filename",
-	    "name": "out matrix file",
+	    "name": "out matrix file name",
 	    "type": "String",
 	    "value-key": "[OUT_MAT_FILENAME]",
 	    "command-line-flag": "-omat",
