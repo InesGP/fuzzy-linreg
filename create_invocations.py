@@ -43,8 +43,8 @@ def create_flirt_invocation(subject, subject_t1_map, output_directory=""):
   invocation = {
     'in_file': in_file,
     'reference': reference,
-    'out_file': out_file,
-    'out_mat_file': out_mat_file
+    'out_filename': out_file,
+    'out_mat_filename': out_mat_file
   }
   return invocation
 
