@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from weakref import ref
 import plotly as plt
 import glob
@@ -41,7 +43,7 @@ def write_significant_digits(significant_digits, output_file):
 def parse_args():
     parser = argparse.ArgumentParser(description='Plot results')
     parser.add_argument('--input-directory', type=str, default='results', help='results directory')
-    parser.add_argument('--output-directory', type=str, default='results/significantdigits', help='output directory')
+    parser.add_argument('--output-directory', type=str, default='results/significantbits', help='output directory')
     parser.add_argument('--dry-run', action='store_true', help='dry run')
     return parser.parse_args()
 

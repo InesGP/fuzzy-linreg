@@ -1,3 +1,6 @@
 numpy
 boutiques
 black
+jupyter
+plotly
+significantdigits
