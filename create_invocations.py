@@ -34,7 +34,7 @@ def extract_sessions(t1_paths):
     
   return subject_t1_map
 
-def create_flirt_invocation(subject, subject_t1_map, output_directory=""):
+def create_flirt_invocation(subject, subject_t1_map, output_directory="", dofs=12):
   in_file = subject_t1_map[subject]['session-1']
   reference = subject_t1_map[subject]['session-2']
   out_file = os.path.join(output_directory, f'{subject}.nii.gz')
@@ -43,6 +43,7 @@ def create_flirt_invocation(subject, subject_t1_map, output_directory=""):
   invocation = {
     'in_file': in_file,
     'reference': reference,
+    'dof': dofs,
     'out_filename': out_file,
     'out_mat_filename': out_mat_file
   }
@@ -59,34 +60,35 @@ def write_invocation(invocation, output_dir, output_file, dry_run=False):
     json.dump(invocation, outfile, indent=4)
 
 
-def create_ieee_invocations(subject_t1_map, invocations_directory, results_directory, dry_run=False):
-  ieee_results_dir = os.path.join(results_directory, 'ieee')
-  ieee_invocations_dir = os.path.join(invocations_directory, 'ieee')
+def create_ieee_invocations(subject_t1_map, invocations_directory, results_directory, dry_run=False, dofs=12):
+  ieee_results_dir = os.path.join(results_directory, f'anat-{dofs}dofs', 'ieee')
+  ieee_invocations_dir = os.path.join(invocations_directory, f'anat-{dofs}dofs', 'ieee')
   if dry_run:
     print(f'\ncreate ieee invocations in {ieee_results_dir}')
   else:
     os.makedirs(ieee_results_dir, exist_ok=True)
   for subject in subject_t1_map.keys():
-    invocation = create_flirt_invocation(subject, subject_t1_map, output_directory=ieee_results_dir)
+    invocation = create_flirt_invocation(subject, subject_t1_map, output_directory=ieee_results_dir, dofs=12)
     write_invocation(invocation, ieee_invocations_dir, f'{subject}.json', dry_run=dry_run)
 
 
-def create_mca_invocations(subject_t1_map, invocations_directory, results_directory, repetitions, dry_run=False):
+def create_mca_invocations(subject_t1_map, invocations_directory, results_directory, repetitions, dry_run=False, dofs=12):
 
   for i in range(1, repetitions + 1):
-    mca_results_dir = os.path.join(results_directory, 'mca', str(i))
-    mca_invocations_dir = os.path.join(invocations_directory, 'mca', str(i))
+    mca_results_dir = os.path.join(results_directory, f'anat-{dofs}dofs', 'mca', str(i))
+    mca_invocations_dir = os.path.join(invocations_directory, f'anat-{dofs}dofs', 'mca', str(i))
     if dry_run:
       print(f'\ncreate mca invocations in {mca_results_dir}')
     else:
       os.makedirs(mca_results_dir, exist_ok=True)
     for subject in subject_t1_map.keys():
-      invocation = create_flirt_invocation(subject, subject_t1_map, output_directory=mca_results_dir)
+      invocation = create_flirt_invocation(subject, subject_t1_map, output_directory=mca_results_dir, dofs=dofs)
       write_invocation(invocation, mca_invocations_dir, f'{subject}.json', dry_run=dry_run)
 
 def create_flirt_invocations(subject_t1_map, args):
-  create_ieee_invocations(subject_t1_map, args.invocations_directory, args.output_directory, args.dry_run)
-  create_mca_invocations(subject_t1_map,  args.invocations_directory, args.output_directory, args.mca_repetitions, args.dry_run)
+  for dofs in [3, 6, 9, 12]:
+    create_ieee_invocations(subject_t1_map, args.invocations_directory, args.output_directory, args.dry_run, dofs=dofs)
+    create_mca_invocations(subject_t1_map,  args.invocations_directory, args.output_directory, args.mca_repetitions, args.dry_run, dofs=dofs)
 
 def parse_args():
   parser = argparse.ArgumentParser(description='Create invocations for IEEE and MCA')
