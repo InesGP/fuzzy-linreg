@@ -4,3 +4,5 @@ black
 jupyter
 plotly
 significantdigits
+matplotlib
+pandas
