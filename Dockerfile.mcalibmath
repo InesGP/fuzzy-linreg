@@ -1,5 +1,5 @@
 # Base image
-FROM vnmd/fsl_6.0.4
+FROM vnmd/fsl_6.0.5.1
 
 RUN mkdir -p /opt/mca-libmath/{fast,standard,quad,mpfr} 
 COPY --from=verificarlo/fuzzy:v0.9.1-lapack /opt/mca-libmath/set-fuzzy-libmath.py /usr/local/bin/set-fuzzy-libmath
