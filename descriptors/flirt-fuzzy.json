@@ -1,5 +1,5 @@
 {
-    "name": "FLIRT 6.0.4 fuzzy",
+    "name": "FLIRT 6.0.5 fuzzy",
     "command-line": "flirt [ANGLE_REP] [APPLY_ISOXFM] [APPLY_XFM] [BBRSLOPE] [BBRTYPE] [BGVALUE] [BINS] [COARSE_SEARCH] [COST] [COST_FUNC] [DATATYPE] [DOF] [ECHOSPACING] [FIELDMAP] [FIELDMAPMASK] [FINE_SEARCH] [FORCE_SCALING] [IN_FILE] [IN_MATRIX_FILE] [IN_WEIGHT] [INTERP] [MIN_SAMPLING] [NO_CLAMP] [NO_RESAMPLE] [NO_RESAMPLE_BLUR] [NO_SEARCH] [PADDING_SIZE] [PEDIR] [REF_WEIGHT] [REFERENCE] [RIGID2D] [SCHEDULE] [SEARCHR_X] [SEARCHR_Y] [SEARCHR_Z] [SINC_WIDTH] [SINC_WINDOW] [USES_QFORM] [VERBOSE] [WM_SEG] [WMCOORDS] [WMNORMS] [OUT_FILE] [OUT_MATRIX_FILE]",
     "author": "Nipype (interface), Oxford Centre for Functional MRI of the Brain (FMRIB) (tool)",
     "description": "A fuzzy (https://github.com/verificarlo/fuzzy) version of FSL FLIRT, as implemented in Nipype (module: nipype.interfaces.fsl, interface: FLIRT).",
@@ -507,7 +507,7 @@
     "tool-version": "1.0.0",
     "schema-version": "0.5",
     "container-image": {
-        "image": "glatard/fsl_6.0.4_fuzzy",
+        "image": "glatard/fsl_6.0.5.1_fuzzy",
         "type": "docker",
         "index": "index.docker.io"
     },
